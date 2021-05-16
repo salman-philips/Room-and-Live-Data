@@ -1,0 +1,19 @@
+1)Go to the project level turn on the top project folder right click and create a new resource directory and inside the resource directory create a graphics directory in which you would have to place your PNG icon
+
+2)go to the app level then drawable right click and create an image asset inside the image I said you would have to select the path folder of the graphic icon PNG that you had placed
+
+3)look for legacy and adaptive solutions artistic background as well as foreground wife of the icon and then test it across various API such as five and eight
+
+
+
+
+1)Include material design dependency
+
+2)add a floating action button not the extended one even though there are various versions of implementing the floating action button using the coordinator layout but this can also be implemented as a part of constraint layout some of the implementations require that setting vectorDrawables.useSupportLibrary=true in App level gradle file default configurations well it is not the case for us now
+
+3)provide a vector asset the desired form and add it as a part of its source and add a background tint
+
+4)don't forget to have the constraints
+
+
+
