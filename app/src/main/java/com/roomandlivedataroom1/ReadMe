@@ -1,0 +1,5 @@
+1)Go to the project level turn on the top project folder right click and create a new resource directory and inside the resource directory create a graphics directory in which you would have to place your PNG icon
+
+2)go to the app level then drawable right click and create an image asset inside the image I said you would have to select the path folder of the graphic icon PNG that you had placed
+
+3)look for legacy and adaptive solutions artistic background as well as foreground wife of the icon and then test it across various API such as five and eight
