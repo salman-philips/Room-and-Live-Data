@@ -15,5 +15,8 @@
 
 4)don't forget to have the constraints
 
+Including butter knife
+1)include it's compile options in the Android subtag off the app level gradle file
+2)then in the dependencies section include the annotation processor and implementation I specified in the ggithub page
 
 
