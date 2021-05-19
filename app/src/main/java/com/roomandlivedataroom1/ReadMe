@@ -1,0 +1,9 @@
+1)make sure that you use butter knife implementations as well as recycler weave for the basic activity not the empty activity for the note activity
+2)create an another activity called as editor activity and make sure that its parent activity is note activity
+3)make the note activity as T launcher activity using the intent filters having action and category with main and launcher respectively
+4)for the editor activity there is a collapsing toolbar which appears large when you leave it in the beginning and once when scroll it becomes small
+5)You can see included layouts such as content_note, for activity_note and content_scrolling for activity_editor with context and shownIn set
+
+
+
+
