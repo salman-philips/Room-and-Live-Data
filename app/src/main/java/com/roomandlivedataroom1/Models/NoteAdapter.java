@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.roomandlivedataroom1.NoteActivity;
+import com.roomandlivedataroom1.Database.NoteEntity;
 import com.roomandlivedataroom1.R;
 
 import java.util.List;

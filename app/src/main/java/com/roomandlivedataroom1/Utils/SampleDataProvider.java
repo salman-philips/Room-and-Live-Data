@@ -1,6 +1,6 @@
 package com.roomandlivedataroom1.Utils;
 
-import com.roomandlivedataroom1.Models.NoteEntity;
+import com.roomandlivedataroom1.Database.NoteEntity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,7 +47,7 @@ public class SampleDataProvider {
         notesList.add(new NoteEntity(getDate(0),SAMPLE_TEXT_1));
         notesList.add(new NoteEntity(getDate(-1),SAMPLE_TEXT_2));
         notesList.add(new NoteEntity(getDate(-2),SAMPLE_TEXT_3));
-
+//by default the ids=0, just by making note entity as a room entity wont generate an id for you
         return notesList;
 
     }

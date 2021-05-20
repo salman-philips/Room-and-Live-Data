@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.roomandlivedataroom1.Models.NoteAdapter;
-import com.roomandlivedataroom1.Models.NoteEntity;
+import com.roomandlivedataroom1.Database.NoteEntity;
 import com.roomandlivedataroom1.Utils.SampleDataProvider;
 
 import androidx.appcompat.app.AppCompatActivity;
