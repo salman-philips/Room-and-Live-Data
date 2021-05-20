@@ -8,9 +8,13 @@ import androidx.room.DatabaseConfiguration;
 import androidx.room.InvalidationTracker;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
+import com.roomandlivedataroom1.Utils.Converters;
+
 @Database(entities = {NoteEntity.class},version = 1)
+@TypeConverters({Converters.class})
 public abstract class ApplicationDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME="NoteDatabase";

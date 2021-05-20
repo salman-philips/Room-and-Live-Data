@@ -9,9 +9,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.roomandlivedataroom1.Models.NoteAdapter;
 import com.roomandlivedataroom1.Database.NoteEntity;
 import com.roomandlivedataroom1.Utils.SampleDataProvider;
+import com.roomandlivedataroom1.ViewModels.NoteViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,8 +33,8 @@ public class NoteActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
 
     @OnClick(R.id.fabAdd)
-    void onFabClicked(View view){
-        Intent editorActivityStartIntent=new Intent(NoteActivity.this,EditorActivity.class);
+    void onFabClicked(View view) {
+        Intent editorActivityStartIntent = new Intent(NoteActivity.this, EditorActivity.class);
         startActivity(editorActivityStartIntent);
     }
 
@@ -44,6 +46,8 @@ public class NoteActivity extends AppCompatActivity {
 
     List<NoteEntity> noteEntityList;
 
+    NoteViewModel noteViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,16 +57,20 @@ public class NoteActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
-
-        noteEntityList= SampleDataProvider.getSampleData();
+        initNoteViewModel();
+        noteEntityList = noteViewModel.noteEntityList;
         initRecyclerView();
+    }
+
+    private void initNoteViewModel() {
+        noteViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(NoteViewModel.class);
     }
 
     private void initRecyclerView() {
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        NoteAdapter noteAdapter=new NoteAdapter(noteEntityList,this);
+        NoteAdapter noteAdapter = new NoteAdapter(noteEntityList, this);
         recyclerView.setAdapter(noteAdapter);
     }
 }
