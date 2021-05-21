@@ -18,8 +18,11 @@ public class NoteViewModel extends AndroidViewModel {
 
     public NoteViewModel(@NonNull Application application) {
         super(application);
-        noteRepository = NoteRepository.getInstance();
+        noteRepository = NoteRepository.getInstance(application.getApplicationContext());
         noteEntityList=noteRepository.noteEntityList;
     }
 
+    public void getSampleDataByFirstInsertingItInDb() {
+        noteRepository.getSampleDataByFirstInsertingItInDb();
+    }
 }

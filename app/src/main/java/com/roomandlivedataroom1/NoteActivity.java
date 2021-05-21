@@ -11,12 +11,15 @@ import com.roomandlivedataroom1.Database.NoteEntity;
 import com.roomandlivedataroom1.Utils.SampleDataProvider;
 import com.roomandlivedataroom1.ViewModels.NoteViewModel;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.List;
@@ -72,5 +75,28 @@ public class NoteActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         NoteAdapter noteAdapter = new NoteAdapter(noteEntityList, this);
         recyclerView.setAdapter(noteAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.note_activity_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int idOfMenuItemSelected=item.getItemId();
+        switch(idOfMenuItemSelected){
+            case R.id.noteActivityMenuAddData:{
+                addSampleData();
+                return true;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void addSampleData() {
+        noteViewModel.getSampleDataByFirstInsertingItInDb();
     }
 }
