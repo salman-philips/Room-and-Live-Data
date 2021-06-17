@@ -1,0 +1,6 @@
+{
+  "issueKeyRegex": "^\\[([^\\[^\\]]+)\\].*$",
+  "milestoneRegex": "^(.+)$",
+  "fixVersionRegex": "^(.+)$",
+  "postMergeStatus": [ "Done" ]
+}
