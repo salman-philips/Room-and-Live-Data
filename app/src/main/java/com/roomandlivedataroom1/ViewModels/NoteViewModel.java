@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.roomandlivedataroom1.Database.NoteEntity;
@@ -13,7 +14,7 @@ import com.roomandlivedataroom1.Utils.SampleDataProvider;
 import java.util.List;
 
 public class NoteViewModel extends AndroidViewModel {
-    public List<NoteEntity> noteEntityList;
+    public LiveData<List<NoteEntity>> noteEntityList;
     private NoteRepository noteRepository;
 
     public NoteViewModel(@NonNull Application application) {
@@ -24,5 +25,9 @@ public class NoteViewModel extends AndroidViewModel {
 
     public void getSampleDataByFirstInsertingItInDb() {
         noteRepository.getSampleDataByFirstInsertingItInDb();
+    }
+
+    public void deleteData() {
+        noteRepository.deleteData();
     }
 }

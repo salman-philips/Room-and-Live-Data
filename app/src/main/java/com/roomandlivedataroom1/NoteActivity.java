@@ -14,6 +14,7 @@ import com.roomandlivedataroom1.ViewModels.NoteViewModel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,7 +49,8 @@ public class NoteActivity extends AppCompatActivity {
                 .setAction("Action", null).show();
     }
 
-    List<NoteEntity> noteEntityList;
+    List<NoteEntity> noteEntityList = new ArrayList<>();
+    NoteAdapter noteAdapter;
 
     NoteViewModel noteViewModel;
 
@@ -61,39 +64,59 @@ public class NoteActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         initNoteViewModel();
-        noteEntityList = noteViewModel.noteEntityList;
+
         initRecyclerView();
     }
 
     private void initNoteViewModel() {
+        Observer<List<NoteEntity>> noteObserver = new Observer<List<NoteEntity>>() {
+            @Override
+            public void onChanged(List<NoteEntity> noteEntities) {
+                noteEntityList.clear();
+                noteEntityList.addAll(noteEntities);
+                if (noteAdapter == null) {
+                    noteAdapter = new NoteAdapter(noteEntityList, NoteActivity.this);
+                    recyclerView.setAdapter(noteAdapter);
+                } else {
+                    noteAdapter.notifyDataSetChanged();
+                }
+            }
+        };
         noteViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(NoteViewModel.class);
+        noteViewModel.noteEntityList.observe(NoteActivity.this, noteObserver);
     }
 
     private void initRecyclerView() {
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        NoteAdapter noteAdapter = new NoteAdapter(noteEntityList, this);
         recyclerView.setAdapter(noteAdapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.note_activity_menu,menu);
+        getMenuInflater().inflate(R.menu.note_activity_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int idOfMenuItemSelected=item.getItemId();
-        switch(idOfMenuItemSelected){
-            case R.id.noteActivityMenuAddData:{
+        int idOfMenuItemSelected = item.getItemId();
+        switch (idOfMenuItemSelected) {
+            case R.id.noteActivityMenuAddData: {
                 addSampleData();
                 return true;
             }
-
+            case R.id.noteActivityMenuDeleteData: {
+               deleteData();
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteData() {
+        noteViewModel.deleteData();
     }
 
     private void addSampleData() {

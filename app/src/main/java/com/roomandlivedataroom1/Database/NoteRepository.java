@@ -2,6 +2,8 @@ package com.roomandlivedataroom1.Database;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import com.roomandlivedataroom1.Utils.SampleDataProvider;
 
 import java.util.List;
@@ -12,14 +14,14 @@ public class NoteRepository {
 
     private NoteRepository noteRepositoryInstance;
 
-    public List<NoteEntity> noteEntityList;
+    public LiveData<List<NoteEntity>> noteEntityList;
     private Executor databaseExecutorThreadInPending = Executors.newSingleThreadExecutor();
     private ApplicationDatabase applicationDatabase;
 
     //simple singleton class
     NoteRepository(Context context) {
-        noteEntityList = SampleDataProvider.getSampleData();
         applicationDatabase = ApplicationDatabase.getInstance(context);
+        noteEntityList = getAllNotes();
     }
 
     public static NoteRepository getInstance(Context context) {
@@ -27,6 +29,14 @@ public class NoteRepository {
     }
 
     public void getSampleDataByFirstInsertingItInDb() {
-        databaseExecutorThreadInPending.execute(() -> applicationDatabase.noteDao().insetAllNotes(noteEntityList));
+        databaseExecutorThreadInPending.execute(() -> applicationDatabase.noteDao().insetAllNotes(SampleDataProvider.getSampleData()));
+    }
+
+    private LiveData<List<NoteEntity>> getAllNotes() {
+        return applicationDatabase.noteDao().getAllNotes();
+    }
+
+    public void deleteData() {
+        databaseExecutorThreadInPending.execute(() -> applicationDatabase.noteDao().deleteAllNotes());
     }
 }

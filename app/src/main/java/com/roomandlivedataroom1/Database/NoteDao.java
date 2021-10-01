@@ -2,6 +2,7 @@ package com.roomandlivedataroom1.Database;
 
 import android.provider.ContactsContract;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -22,7 +23,8 @@ public interface NoteDao {
 
     @Query("SELECT * FROM notes WHERE id=:id") NoteEntity getNoteById(int id);
 
-    @Query("SELECT * FROM notes ORDER BY date DESC") List<NoteEntity> getAllNotes();
+    @Query("SELECT * FROM notes ORDER BY date DESC")
+    LiveData<List<NoteEntity>> getAllNotes();
 
     @Query("DELETE FROM notes") int deleteAllNotes();
 
